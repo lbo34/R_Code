@@ -1,0 +1,18 @@
+# logs is available in your workspace
+
+# Defition of the extract_info() function
+extract_info <- function(x, property = "success", include_all = TRUE) {
+  info <- c()
+  for (log in x) {
+    if (include_all || !log$success) {
+     info <- c(info, log[[property]])
+    }
+  }
+  return(info)
+}
+
+# Generate vector of messages
+extract_info(logs, property = c("details","message"))
+
+# Generate vector of locations for failed log entries
+extract_info(logs, property = c("details","location"), include_all = FALSE)
